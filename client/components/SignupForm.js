@@ -3,12 +3,19 @@ import { graphql } from 'react-apollo'
 import AuthForm from './AuthForm'
 import mutation from '../mutations/Signup'
 import query from '../queries/CurrentUser'
+import { hashHistory } from 'react-router'
 
 class SignupForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
       errors: []
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    if (!this.props.data.user && nextProps.data.user) {
+      hashHistory.push('/dashboard')
     }
   }
 
